@@ -1,0 +1,36 @@
+{
+  "name": "discord-bot-js",
+  "version": "1.0.0",
+  "description": "A bot for discord built with discord.js",
+  "main": "index.js",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "cors": "^2.8.5",
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "luxon": "^3.1.1",
+    "mongoose": "^6.8.2",
+    "prettier": "^2.8.1"
+  },
+  "scripts": {
+    "start": "ts-node-dev --respawn --transpile-only --quiet --clear --rs index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apozinn/discord-bot-js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/apozinn/discord-bot-js/issues"
+  },
+  "homepage": "https://github.com/apozinn/discord-bot-js#readme",
+  "devDependencies": {
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.9.4"
+  }
+}
