@@ -1,7 +1,6 @@
 # Discord bot JS
 
 [![discord.js](https://img.shields.io/github/package-json/dependency-version/apozinn/discord-bot-js/discord.js)](https://discord.js.org/)
-[![License](https://img.shields.io/badge/license-MIT-blue)](https://opensource.org/licenses/MIT)
 [![Stars](https://img.shields.io/github/stars/apozinn/discord-bot-js.svg)](https://github.com/apozinn/discord-bot-js/stargazers)
 [![Pull Requests](https://img.shields.io/badge/Pull%20Requests-Welcome!-brightgreen)](https://github.com/apozinn/discord-bot-js/pulls)
 
