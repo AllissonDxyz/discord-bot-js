@@ -1,19 +1,21 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model } from "mongoose";
 
-const clientSchema = new Schema({
+let ClientSchema = new Schema({
   idB: {type: String},
   name: {type: String},
-  prefixo: {type: String, default: "!"},
-  color: {type: String, default: "#000000"},
-  typeConfig: {type: String, default: "reações"},
-  deleteMsg: {type: Boolean, default: false},
+  language: {type: String, default: "pt-BR"},
+  prefix: {type: String, default: "!"},
+  color: {type: String, default: "#000"},
+  deletCommand: {type: Boolean, default: false},
   status: {type: Array, default: []},
   blacklist: {type: Array, default: []},
   globalban: {type: Array, default: []},
-  manutenção: {
-    status: {type: Boolean, default: false},
-    motivo: {type: String, defaut: "null"},
+  dashboardAccess: {type: String, default: "adm"},
+  maintenance: {
+    activated: {type: Boolean, default: false},
+    reason: {type: String, defaut: ""},
   },
-}, { bufferCommands: false });
+});
 
-export default model("Client", clientSchema);
+const Client = model("Client", ClientSchema);
+export default Client;

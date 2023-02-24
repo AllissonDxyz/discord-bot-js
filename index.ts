@@ -3,7 +3,7 @@ import Database from './src/database/main';
 
 async function Init() {
 	await Database();
-	await new Client();
+	new Client();
 }
 
 Init();

@@ -5,8 +5,9 @@ import Cors from 'cors';
 import 'dotenv/config';
 
 export default class Api {
-	public port: number = config.port;
+	public port: string = config.port;
 	public app: express = null;
+    public bot;
 
 	constructor(bot) {
 		this.app = express();
@@ -27,7 +28,7 @@ export default class Api {
         });
 
         this.app.listen(this.port, () => {
-            utils.logger(`Api iniciada em http://localhost:${this.port}/`);
+            utils.logger(`Api listening in http://localhost:${this.port}/`);
         });
 	}
 }

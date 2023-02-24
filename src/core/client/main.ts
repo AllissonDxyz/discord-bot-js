@@ -1,9 +1,10 @@
 import { Client, IntentsBitField, ActivityType, Collection } from "discord.js";
-import commandsHandler from "../../handlers/commands";
 import eventsHandler from "../../handlers/events";
-import slashCommandsHandler from "../../handlers/slashCommands";
+import commandsHandler from "../../handlers/commands";
 import utils from "../../utils/main";
 import "dotenv/config";
+import ClientDB from "../../database/schemas/client";
+import DatabaseController from "../../database/controller";
 
 export default class ClientController {
 	constructor() {
@@ -18,30 +19,37 @@ export default class ClientController {
 
 		if (!token) {
 			utils.logger(
-				"Não foi possivel encontrar o token, tente novamente.",
+				"Token not found.",
 				{ error: true }
 			);
 			return process.exit();
 		}
 
-		["commands", "events", "slashCommands"].forEach(
+		["events", "commands"].forEach(
 			(x) => (bot[x] = new Collection())
 		);
-		[eventsHandler, commandsHandler, slashCommandsHandler].forEach((x) =>
+		[eventsHandler, commandsHandler].forEach((x) =>
 			x(bot)
 		);
 
 		bot.login(token)
-			.catch((err) => console.error(err.message))
-			.finally(() => {
-				utils.logger(`${bot.user.tag}(${bot.user.id}) iniciado.`);
+			.catch((err) => utils.logger(err.message, { error: true }))
+			.finally(async () => {
+				utils.logger(`${bot.user.tag}(${bot.user.id}) initialized.`);
 				this.slashCommands(bot);
+				const _client = await ClientDB.findOne({ idB: bot.user.id });
+				if (!_client) {
+					return DatabaseController.create("client", {
+						id: bot.user.id,
+						name: bot.user.username,
+					});
+				}
 			});
 	}
 
-	slashCommands(bot): void {
+	private slashCommands(bot) {
 		bot.application.commands
-			.set(bot.slashCommands.map((c) => c.config.data))
+			.set(bot.commands.map((c) => c.config.data))
 			.catch((err) => utils.logger(err.message, { error: true }));
 	}
 }
